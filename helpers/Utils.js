@@ -18,7 +18,7 @@ class Utils {
   static async generateJWT(payload) {
     try {
       let token = await jwt.sign(payload, secret);
-      return token;
+      return token
     } catch (error) {
       throw error
     }
