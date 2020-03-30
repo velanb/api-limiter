@@ -7,6 +7,7 @@ const path = require('path')
 const express = require('express');
 const morgan = require('morgan');
 const colors = require('colors/safe');
+const bodyParser = require('body-parser');
 
 //Import DB connection module
 const {
@@ -30,6 +31,8 @@ const logStream = fs.createWriteStream(path.join(__dirname, 'appLog.log'), {
 app.use(morgan('combined', {
     stream: logStream
 }));
+
+app.use(bodyParser.json())
 
 // Create server
 const server = http.createServer(app);
