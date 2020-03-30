@@ -5,8 +5,7 @@ let secret = 'password';
 class Utils {
   static async hashPassword(password) {
     let saltRounds = 6;
-    let salt = await bcrypt.genSalt(saltRounds)
-    let hash = await bcrypt.hash(password, salt);
+    let hash = await bcrypt.hash(password, saltRounds);
     return hash;
   }
 

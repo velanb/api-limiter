@@ -2,10 +2,10 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 let UserSchema = new Schema({
-  //   userId: {
-  //     type: Number,
-  //     required: true
-  //   },
+  userId: {
+    type: Number,
+    required: true
+  },
   userName: {
     type: String,
     required: true
@@ -28,4 +28,17 @@ let UserSchema = new Schema({
   }
 });
 
-module.exports = mongoose.model("User", UserSchema);
+let adminTracker = new Schema({
+  userIdCounter: {
+    type: Number,
+    default: 0
+  },
+  clientCounter: {
+    type: Number,
+    default: 0
+  }
+})
+
+exports.UserModel = mongoose.model("User", UserSchema);
+
+exports.adminTrackerModel = mongoose.model('AdminTracker', adminTracker);
