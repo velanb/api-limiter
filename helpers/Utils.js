@@ -4,12 +4,14 @@ let secret = 'password';
 
 class Utils {
   static async hashPassword(password) {
-    let hash = await bcrypt.hash(password, 16);
+    let saltRounds = 6;
+    let salt = await bcrypt.genSalt(saltRounds)
+    let hash = await bcrypt.hash(password, salt);
     return hash;
   }
 
-  static async verifyPassord(hash, password) {
-    let status = await bcrypt.compare(hash, password);
+  static async verifyPassord(password, hash) {
+    let status = await bcrypt.compare(password, hash);
     return status;
   }
 

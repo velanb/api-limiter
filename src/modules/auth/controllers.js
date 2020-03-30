@@ -37,6 +37,7 @@ exports.generateTokenController = async (req, res, next) => {
     password
   } = req.body;
 
+
   try {
     let token = await generateTokenService(email, password)
     res.json(token);

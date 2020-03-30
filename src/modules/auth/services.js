@@ -19,7 +19,12 @@ exports.generateTokenService = async (email, password) => {
 
     if (userStatus) {
       let userObj = await fetchUserByEmail(email);
-      let verificationStatus = await validateCredentials(userObj, password);
+      let verificationStatus = await validateCredentials({
+        username: userObj.userName,
+        email: userObj.email,
+        password: userObj.password
+      }, password);
+
       if (verificationStatus) {
         let token = await Utils.generateJWT({
           username: userObj.userName,

@@ -23,7 +23,9 @@ exports.generateTokenValidator = [
 
 exports.validateCredentials = async (userObj, password) => {
   try {
-    let verfiyPassword = await Utils.verifyPassord(userObj.password, password);
+    let verfiyPassword = await Utils.verifyPassord(password, userObj.password);
+    console.log(verfiyPassword)
+
     return verfiyPassword;
   } catch (error) {
     throw error
