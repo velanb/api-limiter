@@ -1,9 +1,13 @@
-const { body } = require("express-validator");
+const {
+  body,
+  check
+} = require("express-validator");
 
-exports.userValidator = [
-  body("username").isAlpha(),
-  body("email").isEmail(),
-  body("password")
-    .isLength({ min: 6 })
-    .isAlphanumeric()
+exports.createUserValidator = [
+  check("username").isAlpha(),
+  check("email").isEmail(),
+  check("password")
+  .isLength({
+    min: 6
+  })
 ];

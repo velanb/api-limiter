@@ -3,7 +3,7 @@ const router = express.Router()
 
 //Import validators 
 const {
-  userValidator
+  createUserValidator
 } = require('./validators')
 
 //Import controllers
@@ -11,7 +11,7 @@ const {
   createUserController
 } = require('./controllers')
 
-router.route('/create').all(userValidator).post(createUserController);
+router.route('/create').post([createUserValidator, createUserController]);
 
 
 

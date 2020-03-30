@@ -32,13 +32,15 @@ app.use(morgan('combined', {
     stream: logStream
 }));
 
-app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({
+    extended: false
+}))
 
 // Create server
 const server = http.createServer(app);
 
 
-app.get('/auth', UserManagement);
+app.use('/auth', UserManagement);
 
 server.listen(PORT, () => {
     console.log(colors.green(` The app is up on port -> ${PORT}`));

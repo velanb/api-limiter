@@ -1,7 +1,4 @@
 const User = require("./models");
-const {
-  validationResult
-} = require("express-validator");
 
 //Import Utils 
 const Utils = require('../../../helpers/Utils')
@@ -15,17 +12,12 @@ exports.createUser = async (username, email, password, isAdmin) => {
   // Only the admin can create a user
   // The admin- token would be required to handle this service
   try {
-    let errors = await validationResult(req);
-    if (!errors.isEmpty()) {
-      return {
-        errors: errors.array()
-      };
-    }
     let user = await User.where({
       email: email
     }).findOne();
+
     if (!user) {
-      let hashPassword = Utils.hashPassword(password)
+      let hashPassword = await Utils.hashPassword(password)
       user = await User.create({
         userName: username,
         email: email,
@@ -38,7 +30,6 @@ exports.createUser = async (username, email, password, isAdmin) => {
         message: `User Created Successfully ->`,
         data: user
       })
-
       return spreadObj;
     }
   } catch (error) {
