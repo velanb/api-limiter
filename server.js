@@ -15,6 +15,9 @@ const {
 //Connect the datat base
 connectDB();
 
+//Import Modules 
+const UserManagement = require('./src/modules/auth/routes')
+
 // Init the application
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -32,9 +35,7 @@ app.use(morgan('combined', {
 const server = http.createServer(app);
 
 
-app.get('/auth', async (req, res, next) => {
-    res.send('dayta')
-})
+app.get('/auth', UserManagement);
 
 server.listen(PORT, () => {
     console.log(colors.green(` The app is up on port -> ${PORT}`));
