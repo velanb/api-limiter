@@ -3,17 +3,18 @@ const router = express.Router()
 
 //Import validators 
 const {
-  createUserValidator
+  createUserValidator,
+  generateTokenValidator
 } = require('./validators')
 
 //Import controllers
 const {
-  createUserController
+  createUserController,
+  generateTokenController
 } = require('./controllers')
 
 router.route('/create').post([createUserValidator, createUserController]);
 
-
-
+router.route('/gentoken').get([generateTokenValidator, generateTokenController])
 
 module.exports = router;
